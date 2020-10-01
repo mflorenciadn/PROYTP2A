@@ -35,5 +35,4 @@ router.delete('/:id', async (req,res) => {
     res.send('Inventor eliminado');
 });
 
-
 module.exports = router;

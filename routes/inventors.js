@@ -17,7 +17,6 @@ router.post('/', async (req, res) => {
     const inventor = req.body;
     await dataInventors.pushInventor(inventor);
     const inventorPersistido = await dataInventors.getInventor(inventor._id); 
-    console.log(inventorPersistido);
     res.json(inventorPersistido);
 });
 

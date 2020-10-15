@@ -5,13 +5,12 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const validarToken = require('./validarToken'); 
 
-const userid = 555;
 
 //Autonticación con JWT: para cada llamada a un endpoint, se debe enviar un token válido
 // generar Token y utilizarlo en el HEADER en Postman para llamar al resto de las rutas
 router.get('/createToken',  (req, res) => {
     const userid = 555; 
-    const token = jwt.sign({ id: userid }, config.secret);
+    const token = jwt.sign({ id: userid },{expiresIn: '1h'}, config.secret);
     res.json({ 
         auth: true, 
         token: token 

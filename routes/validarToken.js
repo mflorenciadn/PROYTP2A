@@ -1,4 +1,5 @@
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken'); 
+//import jwt from 'jsonwebtoken'
 const config = require('../config');
 
 function validarToken (req, res, next) {

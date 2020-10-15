@@ -3,7 +3,7 @@ const router = express.Router();
 const dataInventors = require('./../data/inventor'); //Importa los datos
 const jwt = require('jsonwebtoken');
 const config = require('../config');
-const validarToken = require('./validarToken'); //no estoy segura
+const validarToken = require('./validarToken'); 
 
 const userid = 555;
 
@@ -24,35 +24,17 @@ router.get('/createToken',  (req, res) => {
 // Listar todos los inventores 
 // http://localhost:3000/api/inventors
 router.get('/', validarToken, async (req, res)  => { //el ASYNC se coloca en el callback!
-    if (req.userid != userid) {  
-        res.status(404).json({
-            auth: false,
-            message: 'No user found'
-        });
-    }
     res.json(await dataInventors.getAllInventors()); //para enviar la información, se debe esperar a que llegue (AWAIT)
 });
 
 // Traer un inventor 
 // http://localhost:3000/api/inventors/8
 router.get('/:id', validarToken, async  (req, res)  => {
-    if (req.userid != userid) {
-        res.status(404).json({
-            auth: false,
-            message: 'No user found'
-        });
-    }
     res.json(await dataInventors.getInventor(req.params.id)); //cuando se envia el response, se debe parsear a json
 });
 
 //Crear un inventor (ALTA)
 router.post('/',validarToken, async (req, res) => {
-    if (req.userid != userid) {
-        res.status(404).json({
-            auth: false,
-            message: 'No user found'
-        });
-    }
     const inventor = req.body;
     await dataInventors.pushInventor(inventor);
     const inventorPersistido = await dataInventors.getInventor(inventor._id); 
@@ -61,12 +43,6 @@ router.post('/',validarToken, async (req, res) => {
 
 //Modificar un inventor (MODIFICACIÓN)
 router.put('/:id',validarToken, async (req, res) => {
-    if (req.userid != userid) {
-        res.status(404).json({
-            auth: false,
-            message: 'No user found'
-        });
-    }
     const inventor = req.body;
     inventor._id = req.params.id;
     await dataInventors.updateInventor(inventor);
@@ -76,12 +52,6 @@ router.put('/:id',validarToken, async (req, res) => {
 
 //Eliminar un inventor (BAJA)
 router.delete('/:id',validarToken, async (req, res) => {
-    if (req.userid != userid) {
-        res.status(404).json({
-            auth: false,
-            message: 'No user found'
-        });
-    }
     console.log('Delete');
     await dataInventors.deleteInventor(req.params.id);
     res.send('Inventor eliminado');

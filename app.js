@@ -33,7 +33,6 @@ app.use('/users', usersRouter);
 ////MIDDLEWARES agregados por cada archivo que se cree dentro de la carpeta routes
 app.use('/api/inventors',inventorsRouter); //cuando se ingresa a '/api/inventors', se debe redireccionar al router inventorsRouter
 app.use('/api/virus', virusRouter);
-app.use('/api/verifyToken', verifytokenRouter);
 
 
 // catch 404 and forward to error handler
